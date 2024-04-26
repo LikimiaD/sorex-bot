@@ -82,10 +82,8 @@ async def handle_threshold_input(message: types.Message, state: FSMContext, thre
     await state.update_data(thresholds=thresholds)
 
     if threshold_type == "min":
-        # Запросить max после установки min
         await prompt_for_threshold(message, state, current_currency, "max", user_data["msg_to_edit_id"])
     else:
-        # Увеличить индекс и сохранить его в состоянии после установки max
         current_index += 1
         await state.update_data(current_index=current_index)
         await collect_thresholds(message, state, current_index, user_data["msg_to_edit_id"])
